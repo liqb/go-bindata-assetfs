@@ -60,3 +60,8 @@ http.Handle("/",
 http.FileServer(
 &assetfs.AssetFS{Asset: Asset, AssetDir: AssetDir, AssetInfo: AssetInfo, Prefix: "data", Fallback: "index.html"}))
 ```
+
+## bug fix
+A bug in the main.go is fixed.
+
+A new Makefile is added which can make go-bindata-assetfs in directory bin by command `make`

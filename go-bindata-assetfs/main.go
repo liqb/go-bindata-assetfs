@@ -75,7 +75,17 @@ func main() {
 		os.Exit(1)
 	}
 	debug := isDebug(os.Args[1:])
-	r := bufio.NewReader(in)
+	
+	// bug fix by liqb036, reopen in
+	in.Close()
+	tmpfile, err := os.Open(in.Name())
+	if err != nil {
+		fmt.Println(">>>Open tempfile failed")
+		os.Exit(1)
+	}
+	// end
+
+	r := bufio.NewReader(tmpfile)
 	done := false
 	for line, isPrefix, err := r.ReadLine(); err == nil; line, isPrefix, err = r.ReadLine() {
 		if !isPrefix {
